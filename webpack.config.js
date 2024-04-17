@@ -2,11 +2,15 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const path = require("path");
 
 module.exports = {
-    entry: "./src/index.tsx",
+    entry: "./src/Bootstrap/index.tsx",
     mode: "development",
     output: {
       filename: "bundle.[fullhash].js",
       path: path.resolve(__dirname, "dist"),
+      publicPath: '/'
+    },
+    devServer: {
+        historyApiFallback: true,
     },
     plugins: [
       new HtmlWebpackPlugin({

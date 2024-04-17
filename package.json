@@ -2,7 +2,7 @@
   "name": "refme",
   "version": "1.0.0",
   "description": "HR resource",
-  "main": "index.js",
+  "main": "src/Bootstrap/index.tsx",
   "scripts": {
     "start": "webpack serve --open",
     "build": "webpack --config webpack.config.js --mode production",
@@ -32,6 +32,7 @@
   },
   "dependencies": {
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "react-router-dom": "6.22.3"
   }
 }
