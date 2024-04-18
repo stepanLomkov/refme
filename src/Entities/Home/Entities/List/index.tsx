@@ -33,11 +33,11 @@ export default function List (): JSX.Element {
             <ul>
                 {date?.map(({ _id, title, description }) => {
                     return (
-                        <li key={ _id } onClick={ () => handleClick(_id) }>
+                        <li key={ _id }>
                             {title}
                             {description}
-                            <button>
-                                Получить рефералку
+                            <button onClick={ () => handleClick(_id) } >
+                                Посмотреть детали
                             </button>
                         </li>
                     )
