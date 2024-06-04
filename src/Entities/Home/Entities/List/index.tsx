@@ -7,18 +7,27 @@ import { API_PREFIX } from "src/Common/Consts";
 export default function List (): JSX.Element {
     const navigate = useNavigate();
     const [date, setData] = useState([]);
+    const [descriptionFilter, setDescriptionFilter] = useState('');
+    const [companyFilter, setCompanyFilter] = useState('');
+    const [cityFilter, setCityFilter] = useState('');
 
-    useEffect(() => {
-        const loadList = async () => {
-            const response = await fetch(`${API_PREFIX}/list`, {
-                method: "GET"
-            })
-    
-            const data = await response.json();
+    const loadList = async () => {
+        const params = !!descriptionFilter || !!companyFilter || !!cityFilter ? new URLSearchParams({
+            description: descriptionFilter,
+            company: companyFilter,
+            city: cityFilter,
+        }) : null;
 
-            return data
-        }
-        
+        const response = await fetch(`${API_PREFIX}/list${params ? `?${params}` : ''}`, {
+            method: "GET"
+        })
+
+        const data = await response.json();
+
+        return data
+    }
+
+    useEffect(() => {        
         loadList().then(listData => setData(listData))
     }, []);
 
@@ -26,16 +35,40 @@ export default function List (): JSX.Element {
         navigate(generatePath(DETAILS_PATH, { id }));
     }
 
+    const updateFiltersHandle = () => {
+        loadList().then(listData => setData(listData));
+    }
+
     return (
         <>
             Устройтесь на работу мечты уже сегодня.
+            <br />
+
+            Поиск по описанию
+            <input onChange={ (e) => setDescriptionFilter(e.target.value)}/>
+            <br />
+
+            Компания
+            <input onChange={ (e) => setCompanyFilter(e.target.value)}/>
+            <br />
+
+            Город
+            <input onChange={ (e) => setCityFilter(e.target.value)}/>
+            <br />
+
+            <button onClick={ updateFiltersHandle }>
+                Обновить фильтрацию          
+            </button>
+            <br />
 
             <ul>
-                {date?.map(({ _id, title, description }) => {
+                {date.length === 0 && 'нет данных'}
+                {date?.map(({ _id, city, company, description }) => {
                     return (
                         <li key={ _id }>
-                            {title}
+                            {company}
                             {description}
+                            {city}
                             <button onClick={ () => handleClick(_id) } >
                                 Посмотреть детали
                             </button>

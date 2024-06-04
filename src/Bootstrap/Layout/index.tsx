@@ -14,7 +14,7 @@ export function MainLayout (): JSX.Element {
     return (
         <>
             <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 'x-large' }}>
-                <span onClick={() => window.location.href = '/'}>RefJob</span>
+                <span onClick={() => window.location.href = '/'}>RefMe</span>
                 {localStorage.getItem('accessToken') ? <button onClick={ () => navigate(PROFILE_PATH) }>Профиль</button> : null}
             </div>
             
