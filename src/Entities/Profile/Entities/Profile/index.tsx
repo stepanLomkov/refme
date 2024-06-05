@@ -47,7 +47,7 @@ export function Profile (): JSX.Element {
             Возможность создавать вакансии: {profile?.hasCrateVacancy ? 'есть' : 'нет'}
             <br/>
 
-            {profile?.haveCrateVacancy ? (
+            {profile?.hasCrateVacancy ? (
                 <button>
                     Создать вакансию
                 </button> 
@@ -61,7 +61,7 @@ export function Profile (): JSX.Element {
                 )
             )}
             <br />
-            {profile?.haveCrateVacancy || profile?.activeConfirm ? (
+            {profile?.hasCrateVacancy || profile?.activeConfirm ? (
                 <button
                     onClick={async () => {
                         await fetch(`${API_PREFIX}/delete-confirm-employment`, {

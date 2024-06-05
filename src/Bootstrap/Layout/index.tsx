@@ -36,7 +36,7 @@ export function MainLayout (): JSX.Element {
                 <Route element={ <AuthPage /> } path={ AUTH_PATH } />
                 <Route element={ <ProfilePage /> } path={ PROFILE_PATH } />
                 <Route element={ <ConfirmEmploymentPage /> } path={ CONFIRM_EMPLOYMENT_PATH } />
-                <Route element={ <AdminPanelPage /> } path={ ADMIN_PANEL_PATH } />
+                <Route element={ <AdminPanelPage /> } path={ `${ADMIN_PANEL_PATH}/*` } />
             </Routes>
         </>
     );
