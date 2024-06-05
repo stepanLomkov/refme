@@ -4,6 +4,7 @@ import { JSX } from "react/jsx-runtime";
 import { API_PREFIX } from "src/Common/Consts";
 import { ADMIN_PANEL_PATH } from "src/Entities/AdminPanel/Bootstrap/Path";
 import { CONFIRM_EMPLOYMENT_PATH } from "src/Entities/ConfirmEmployment/Bootstrap/Path";
+import { CREATE_PATH } from "src/Entities/Create/Bootstrap/Path";
 
 export function Profile (): JSX.Element {
     const navigate = useNavigate();
@@ -48,7 +49,11 @@ export function Profile (): JSX.Element {
             <br/>
 
             {profile?.hasCrateVacancy ? (
-                <button>
+                <button
+                    onClick={() => {
+                        navigate(`/${CREATE_PATH}`);
+                    }}
+                >
                     Создать вакансию
                 </button> 
             ) : (

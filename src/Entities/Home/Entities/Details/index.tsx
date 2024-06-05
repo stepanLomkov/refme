@@ -49,6 +49,12 @@ export default function Details (): JSX.Element {
             Город: {data.city} <br />
             Описание: {data.description} <br />
             Подробная информация: {data.more} <br />
+
+            <a href={`${API_PREFIX}/download/${data.file}`} download>
+                доказательство  возможности рекомендации
+            </a>
+            <br /><br />
+
             {localStorage.getItem('accessToken') ? (
                 <button onClick={ handleSomeClick }>
                     Получить рефералку

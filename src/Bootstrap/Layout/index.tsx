@@ -6,6 +6,8 @@ import { AuthPage } from "src/Entities/Auth/Bootstrap";
 import { AUTH_PATH } from "src/Entities/Auth/Bootstrap/Path";
 import { ConfirmEmploymentPage } from "src/Entities/ConfirmEmployment/Bootstrap";
 import { CONFIRM_EMPLOYMENT_PATH } from "src/Entities/ConfirmEmployment/Bootstrap/Path";
+import { CreatePage } from "src/Entities/Create/Bootstrap";
+import { CREATE_PATH } from "src/Entities/Create/Bootstrap/Path";
 import { HomePage } from "src/Entities/Home/Bootstrap";
 import { HOME_PATH } from "src/Entities/Home/Bootstrap/Path";
 import { ProfilePage } from "src/Entities/Profile/Bootstrap";
@@ -37,6 +39,7 @@ export function MainLayout (): JSX.Element {
                 <Route element={ <ProfilePage /> } path={ PROFILE_PATH } />
                 <Route element={ <ConfirmEmploymentPage /> } path={ CONFIRM_EMPLOYMENT_PATH } />
                 <Route element={ <AdminPanelPage /> } path={ `${ADMIN_PANEL_PATH}/*` } />
+                <Route element={ <CreatePage /> } path={ CREATE_PATH } />
             </Routes>
         </>
     );

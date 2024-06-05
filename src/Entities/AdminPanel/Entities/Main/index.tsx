@@ -1,6 +1,7 @@
 import { JSX } from "react/jsx-runtime";
 import { CONFIRM_EMPLOYMENT_PATH } from "../ConfirmEmployment/Path";
 import { useNavigate } from "react-router-dom";
+import { CONFIRM_CREATE_VACANCY_PATH } from "../ConfirmCreateVacancy/Path";
 
 export function Main (): JSX.Element {
     const navigate = useNavigate();
@@ -9,6 +10,7 @@ export function Main (): JSX.Element {
         <>
             Панель администратора
             <br /><br />
+
             <button
                 onClick={() => {
                     navigate(CONFIRM_EMPLOYMENT_PATH);
@@ -16,6 +18,16 @@ export function Main (): JSX.Element {
             >
                 Подтверждение трудоустройства
             </button>
+            <br /><br />
+
+            <button
+                onClick={() => {
+                    navigate(CONFIRM_CREATE_VACANCY_PATH);
+                }}
+            >
+                Подтверждение создаваемой вакансии
+            </button>
+            <br /><br />
         </>
     );
 }

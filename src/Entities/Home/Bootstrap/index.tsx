@@ -8,7 +8,7 @@ export function HomePage (): JSX.Element {
     return (
         <Routes>
             <Route element={ <ListPage /> } index />
-            <Route element={ <DetailsPage /> } path={ `${DETAILS_PATH}/*`} />
+            <Route element={ <DetailsPage /> } path={ DETAILS_PATH } />
         </Routes>
     );
 }
