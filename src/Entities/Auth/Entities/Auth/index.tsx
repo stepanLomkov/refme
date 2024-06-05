@@ -28,9 +28,11 @@ export function Auth (): JSX.Element {
         loginUser().then(data => {
             if (data?.message === 'Login successfull' && data?.accessToken) {
                 localStorage.setItem('accessToken', data.accessToken);
-                location.href = '/';
+                location.href = document.referrer;
             }
         })
+
+        
     }
 
     const handleRegisterClick = () => {
@@ -57,12 +59,15 @@ export function Auth (): JSX.Element {
 
     return (
         <>
-            Логин <input onBlur={(e) => setLogin(e.target.value)}/>
-            Пароль <input onBlur={(e) => setPassword(e.target.value)}/>
+            Логин <input onBlur={(e) => setLogin(e.target.value)} />
+            <br />
+            Пароль <input onBlur={(e) => setPassword(e.target.value)} type="password" />
+            <br />
 
             <button onClick={ handleLoginClick } >
                 Войти
             </button>
+            <br />
 
             <button onClick={ handleRegisterClick }>
                 Зарегистрироваться

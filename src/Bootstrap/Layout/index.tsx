@@ -1,7 +1,11 @@
 import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import { JSX } from "react/jsx-runtime";
+import { AdminPanelPage } from "src/Entities/AdminPanel/Bootstrap";
+import { ADMIN_PANEL_PATH } from "src/Entities/AdminPanel/Bootstrap/Path";
 import { AuthPage } from "src/Entities/Auth/Bootstrap";
 import { AUTH_PATH } from "src/Entities/Auth/Bootstrap/Path";
+import { ConfirmEmploymentPage } from "src/Entities/ConfirmEmployment/Bootstrap";
+import { CONFIRM_EMPLOYMENT_PATH } from "src/Entities/ConfirmEmployment/Bootstrap/Path";
 import { HomePage } from "src/Entities/Home/Bootstrap";
 import { HOME_PATH } from "src/Entities/Home/Bootstrap/Path";
 import { ProfilePage } from "src/Entities/Profile/Bootstrap";
@@ -15,7 +19,15 @@ export function MainLayout (): JSX.Element {
         <>
             <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 'x-large' }}>
                 <span onClick={() => window.location.href = '/'}>RefMe</span>
-                {localStorage.getItem('accessToken') ? <button onClick={ () => navigate(PROFILE_PATH) }>Профиль</button> : null}
+                {localStorage.getItem('accessToken') ?
+                    <button onClick={ () => navigate(PROFILE_PATH) }>
+                        Профиль
+                    </button>
+                    :
+                    <button onClick={ () => navigate(AUTH_PATH)}>
+                        Зарегистрироваться или войти
+                    </button>
+                }
             </div>
             
             <Routes>
@@ -23,6 +35,8 @@ export function MainLayout (): JSX.Element {
                 <Route element={ <HomePage /> } path={ `/${HOME_PATH}/*` } />
                 <Route element={ <AuthPage /> } path={ AUTH_PATH } />
                 <Route element={ <ProfilePage /> } path={ PROFILE_PATH } />
+                <Route element={ <ConfirmEmploymentPage /> } path={ CONFIRM_EMPLOYMENT_PATH } />
+                <Route element={ <AdminPanelPage /> } path={ ADMIN_PANEL_PATH } />
             </Routes>
         </>
     );

@@ -44,7 +44,9 @@ export default function Details (): JSX.Element {
     return (
         <>
             <button onClick={() => navigate('..')}>Назад</button>
-            Компания: {data.title} <br />
+            <br />
+            Компания: {data.company} <br />
+            Город: {data.city} <br />
             Описание: {data.description} <br />
             Подробная информация: {data.more} <br />
             {localStorage.getItem('accessToken') ? (
