@@ -5,6 +5,8 @@ import { ConfirmEmployment } from "../Entities/ConfirmEmployment";
 import { CONFIRM_EMPLOYMENT_PATH } from "../Entities/ConfirmEmployment/Path";
 import { CONFIRM_CREATE_VACANCY_PATH } from "../Entities/ConfirmCreateVacancy/Path";
 import { ConfirmCreateVacancy } from "../Entities/ConfirmCreateVacancy";
+import { Reports } from "../Entities/Reports.tsx";
+import { REPORTS_PATH } from "../Entities/Reports.tsx/Path";
 
 export function AdminPanelPage (): JSX.Element {
     const hasAccess = localStorage.getItem('accessToken')
@@ -15,6 +17,7 @@ export function AdminPanelPage (): JSX.Element {
             <Route element={ COMPONENT } index />
             <Route element={ <ConfirmEmployment /> } path={ CONFIRM_EMPLOYMENT_PATH } />
             <Route element={ <ConfirmCreateVacancy /> } path={ CONFIRM_CREATE_VACANCY_PATH } />
+            <Route element={ <Reports /> } path={ REPORTS_PATH } />
         </Routes>
     );
 }

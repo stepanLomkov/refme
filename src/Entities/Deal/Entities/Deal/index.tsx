@@ -6,6 +6,7 @@ import { DETAILS_PATH } from "src/Entities/Home/Bootstrap/Pages/Details/Path";
 import { HOME_PATH } from "src/Entities/Home/Bootstrap/Path";
 import { FillData } from "./Components/FillData";
 import { ApproveRegistration } from "./Components/ApproveRegistration";
+import { Report } from "./Components/Report";
 
 export function Deal (): JSX.Element {
     const navigate = useNavigate();
@@ -73,12 +74,8 @@ export function Deal (): JSX.Element {
                             Ожидайте, пока соискатель не заполнит данные
                             <br /><br />
 
-                            Если соискатель долгое время не заполняет данные, вы можете оставить жалобу
-                            <input />
-                            <br />
-                            <button>
-                                Пожаловаться
-                            </button>
+                            Если соискатель долгое время не заполняет данные, вы можете оставить жалобу<br />
+                            <Report />
                         </>
                     );
                 case 'внесение данных сотрудником в реферальную программу':
@@ -90,10 +87,7 @@ export function Deal (): JSX.Element {
                             Как только с соискателем свяжется HR, он отметит это, а вакансия вернется в общий поиск<br /><br />
 
                             Если соискатель долгое время не отмечает заверщение сделки, вы можете оставить жалобу<br />
-                            <input />
-                            <button>
-                                Пожаловаться
-                            </button>
+                            <Report />
                         </>
                     );
             }
@@ -107,12 +101,8 @@ export function Deal (): JSX.Element {
                             Ожидайте, пока сотрудник не заполнит данные в реферальную программу
                             <br /><br />
 
-                            Если сотрудник долгое время не заполняет данные, вы можете оставить жалобу
-                            <input />
-                            <br />
-                            <button>
-                                Пожаловаться
-                            </button>
+                            Если сотрудник долгое время не заполняет данные, вы можете оставить жалобу<br />
+                            <Report />
                         </>
                     );
                 case 'ожидание результатов сделки':
@@ -126,11 +116,8 @@ export function Deal (): JSX.Element {
                             </button>
                             <br /><br />
 
-                            Если доказательства сотрудника недостаточны, или продолжительное время с вами не связываются, вы можете оставить жалобу
-                            <input />
-                            <button>
-                                Пожаловаться
-                            </button>
+                            Если доказательства сотрудника недостаточны, или продолжительное время с вами не связываются, вы можете оставить жалобу<br />
+                            <Report />
                         </>
                     );
             }

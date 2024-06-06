@@ -64,7 +64,7 @@ export function ConfirmCreateVacancy () {
                     return (
                         <li key={ _id }>
                             {`Пользователь: ${login}, `}
-                            {`Контактный телефон: +7${phone}, `}
+                            {`Контактный телефон: ${phone}, `}
                             {`Компания: ${company}, `}
                             {`Город: ${city}, `}
                             {`Краткое описание: ${description}, `}

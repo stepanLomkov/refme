@@ -64,7 +64,7 @@ export function ConfirmEmployment () {
                     return (
                         <li key={ _id }>
                             {`Пользователь: ${userLogin}, `}
-                            {`Контактный телефон: +7${phone}, `}
+                            {`Контактный телефон: ${phone}, `}
                             {`Компания: ${company}, `}
                             <a href={`${API_PREFIX}/download/${file}`} download>
                                 доказательство трудоустройства

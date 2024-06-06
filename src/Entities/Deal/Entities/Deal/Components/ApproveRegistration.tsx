@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { API_PREFIX } from "src/Common/Consts";
+import { Report } from "./Report";
 
 export function ApproveRegistration ({ clientInfo, onSucces }) {
     const { id } = useParams();
@@ -49,7 +50,7 @@ export function ApproveRegistration ({ clientInfo, onSucces }) {
             Дата рождения: {clientInfo?.dateOfBorn}
             <br /><br />
 
-            Контактный телефон +7 {clientInfo?.phone}
+            Контактный телефон {clientInfo?.phone}
             <br /><br />
 
             <a href={`${API_PREFIX}/download/${clientInfo?.cv}`} download>
@@ -57,12 +58,8 @@ export function ApproveRegistration ({ clientInfo, onSucces }) {
             </a>
             <br /><br />
 
-            Если данные введены неккоректно, то оставьте жалобу
-            <input />
-            <br />
-            <button>
-                Пожаловаться
-            </button>
+            Если данные введены неккоректно, то оставьте жалобу<br />
+            <Report />
             <br /><br />
 
             Если все данные корректны и вы внесли их в реферальную программу вашей компании, то предоставьте доказательства этого (например скрин с отправленным запросом) и отправьте форму

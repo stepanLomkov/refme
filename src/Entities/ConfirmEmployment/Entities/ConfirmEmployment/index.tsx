@@ -57,7 +57,7 @@ export function ConfirmEmployment (): JSX.Element {
             }} />
             <br /><br />
 
-            Контактный телефон +7 
+            Контактный телефон 
             <input onChange={(e) => {
                 setPhone(e.target.value);
             }}/>

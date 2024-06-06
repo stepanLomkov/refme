@@ -79,7 +79,7 @@ export function FillData ({ onSucces }) {
             }} />
             <br /><br />
 
-            Контактный телефон +7 
+            Контактный телефон
             <input onChange={(e) => {
                 setPhone(e.target.value);
             }}/>
