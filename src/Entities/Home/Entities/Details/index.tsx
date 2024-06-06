@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { generatePath, useNavigate, useParams } from "react-router-dom";
 import { JSX } from "react/jsx-runtime";
 import { API_PREFIX } from "src/Common/Consts";
 import { AUTH_PATH } from "src/Entities/Auth/Bootstrap/Path";
+import { DEAL_PATH } from "src/Entities/Deal/Bootstrap/Path";
 
 export default function Details (): JSX.Element {
     const navigate = useNavigate();
@@ -23,27 +24,22 @@ export default function Details (): JSX.Element {
         loadDetails().then(detailsData => setData(detailsData))
     }, []);
 
-    const handleSomeClick = () => {
-        const doSome = async () => {
+    const handleAssignClick = () => {
+        const assignVacancy = async () => {
 
-            const response = await fetch(`${API_PREFIX}/some-with-auth`, {
+            await fetch(`${API_PREFIX}/assign-vacancy/${id}`, {
                 method: "GET",
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
                 },
             })
-    
-            const data = await response.json();
-
-            return data
         }
         
-        doSome()
+        assignVacancy().then(() => navigate(`/${generatePath(DEAL_PATH, { id })}`));
     }
 
     return (
         <>
-            <button onClick={() => navigate('..')}>Назад</button>
             <br />
             Компания: {data.company} <br />
             Город: {data.city} <br />
@@ -56,7 +52,7 @@ export default function Details (): JSX.Element {
             <br /><br />
 
             {localStorage.getItem('accessToken') ? (
-                <button onClick={ handleSomeClick }>
+                <button onClick={ handleAssignClick }>
                     Получить рефералку
                 </button>
             ) : (

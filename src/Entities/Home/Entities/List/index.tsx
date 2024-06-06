@@ -66,9 +66,9 @@ export default function List (): JSX.Element {
                 {date?.map(({ _id, city, company, description }) => {
                     return (
                         <li key={ _id }>
-                            {company}
-                            {description}
-                            {city}
+                            {company}, 
+                            {description}, 
+                            {city}, 
                             <button onClick={ () => handleClick(_id) } >
                                 Посмотреть детали
                             </button>
