@@ -6,6 +6,8 @@ import { API_PREFIX, GENERAL_COLOR } from "src/Common/Consts";
 export function Auth (): JSX.Element {
     const [login, setLogin] = useState('');
     const [password, setPassword] = useState('');
+    const [message, setMessage] = useState();
+    const [messageColor, setMessageColor] = useState();
 
     const handleLoginClick = () => {
         const loginUser = async () => {
@@ -27,9 +29,12 @@ export function Auth (): JSX.Element {
         }
         
         loginUser().then(data => {
-            if (data?.message === 'Login successfull' && data?.accessToken) {
+            setMessage(data?.message);
+            setMessageColor(data?.color);
+
+            if (data?.message === 'Успешный вход' && data?.accessToken) {
                 localStorage.setItem('accessToken', data.accessToken);
-                location.href = document.referrer;
+                location.href = '/';
             }
         })
 
@@ -37,7 +42,7 @@ export function Auth (): JSX.Element {
     }
 
     const handleRegisterClick = () => {
-        const loginUser = async () => {
+        const registerUser = async () => {
             const urlencoded = new URLSearchParams();
             urlencoded.append("login", login);
             urlencoded.append("password", password);
@@ -55,7 +60,10 @@ export function Auth (): JSX.Element {
             return data
         }
         
-        loginUser()
+        registerUser().then(data => {
+            setMessage(data?.message);
+            setMessageColor(data?.color);
+        })
     }
 
     return (
@@ -64,6 +72,14 @@ export function Auth (): JSX.Element {
             <br />
             <b style={{ color: GENERAL_COLOR, fontSize: '20px' }}>Пароль</b> <input style={{ height: '25px' }} onBlur={(e) => setPassword(e.target.value)} type="password" />
             <br />
+
+            {message ? (
+                <>
+                    <span style={{ color: messageColor }}>{message}</span>
+                    <br />
+                </>
+            ) : null}
+
 
             <Button onClick={ handleLoginClick } >
                 Войти
