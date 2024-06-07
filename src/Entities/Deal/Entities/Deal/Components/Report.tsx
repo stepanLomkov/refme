@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom";
+import { Button } from "src/Common/Components/Button";
 import { API_PREFIX } from "src/Common/Consts";
 
 export function Report () {
@@ -35,29 +36,21 @@ export function Report () {
 
     return (
         <>
-            <input onChange={(e) => {
+            <input style={{ height: '25px' }} onChange={(e) => {
                 setText(e.target.value);
             }} />
 
-            <button onClick={ handleReport }>
-                Пожаловаться
-            </button>
-
-            <br />
-
             {hasErrors ? (
-                <>
-                    <span style={{ color: 'red' }}>Заполните поле для отправки жалобы!</span>
-                    <br /><br />
-                </>
+                <span style={{ color: 'red' }}>Заполните поле для отправки жалобы!</span>
             ) : null}
 
             {hasSuccess ? (
-                <>
-                    <span style={{ color: 'green' }}>Жалоба отправлена</span>
-                    <br /><br />
-                </>
+                <span style={{ color: 'green' }}>Жалоба отправлена</span>
             ) : null}
+            <br />
+            <Button onClick={ handleReport }>
+                Пожаловаться
+            </Button>
         </>
     );
 }

@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { generatePath, useNavigate, useParams } from "react-router-dom";
 import { JSX } from "react/jsx-runtime";
-import { API_PREFIX } from "src/Common/Consts";
+import { API_PREFIX, GENERAL_COLOR } from "src/Common/Consts";
 import { DETAILS_PATH } from "src/Entities/Home/Bootstrap/Pages/Details/Path";
 import { HOME_PATH } from "src/Entities/Home/Bootstrap/Path";
 import { FillData } from "./Components/FillData";
 import { ApproveRegistration } from "./Components/ApproveRegistration";
 import { Report } from "./Components/Report";
+import { Button } from "src/Common/Components/Button";
 
 export function Deal (): JSX.Element {
     const navigate = useNavigate();
@@ -62,10 +63,10 @@ export function Deal (): JSX.Element {
                             <br /><br />
 
                             Пока соискатель не нашелся, вы можете удалить вакансию
-                            <br />
-                            <button onClick={ handleDelete }>
+                            <br /><br />
+                            <Button onClick={ handleDelete }>
                                 Удалить вакансию
-                            </button>
+                            </Button>
                         </>
                     );
                 case 'ожидание заполнения данных соискателем':
@@ -83,10 +84,10 @@ export function Deal (): JSX.Element {
                 case 'ожидание результатов сделки':
                     return (
                         <>
-                            Ожидаем завершение сделки<br />
+                            <span style={{ color: GENERAL_COLOR }}>Ожидаем завершение сделки</span><br /><br />
                             Как только с соискателем свяжется HR, он отметит это, а вакансия вернется в общий поиск<br /><br />
 
-                            Если соискатель долгое время не отмечает заверщение сделки, вы можете оставить жалобу<br />
+                            Если соискатель долгое время не отмечает заверщение сделки, вы можете оставить жалобу<br /><br />
                             <Report />
                         </>
                     );
@@ -111,9 +112,9 @@ export function Deal (): JSX.Element {
                             Сотрудник компании ввел ваши данные в реферальную программу <a href={`${API_PREFIX}/download/${data?.approveRegistration}`} download>(доказательства)</a><br />
 
                             Дождитесь звонка от HR, а после подтвердите завершение сделки<br /><br />
-                            <button onClick={ handleCompleteDeal }>
+                            <Button onClick={ handleCompleteDeal }>
                                 Завершить сделку
-                            </button>
+                            </Button>
                             <br /><br />
 
                             Если доказательства сотрудника недостаточны, или продолжительное время с вами не связываются, вы можете оставить жалобу<br />
@@ -125,22 +126,22 @@ export function Deal (): JSX.Element {
     }
 
     return (
-        <>
-            Сделка по вакансии
+        <div style={{ display: 'flex', flexDirection: 'column', width: '50%', marginTop: '30px', maxWidth: '500px', alignItems: 'center' }}>
+            <span style={{ color: GENERAL_COLOR }}>Сделка по вакансии</span>
             <br /><br />
 
-            Краткое описание: {data?.description}<br />
-            Компания: {data?.company}<br />
-            Город: {data?.city}<br />
-            <button
+            <div><span style={{ color: GENERAL_COLOR }}>Краткое описание: </span> {data?.description}</div><br />
+            <div><span style={{ color: GENERAL_COLOR }}>Компания: </span>{data?.company}</div><br />
+            <div><span style={{ color: GENERAL_COLOR }}>Город: </span>{data?.city}</div><br />
+            <Button
                 onClick={() => {
                     navigate(`/${HOME_PATH}/${generatePath(DETAILS_PATH, { id })}`);
                 }}
             >
                 Перейти к полному просмотру вакансии
-            </button>
+            </Button>
             <br /><br />
             <BodyComponent />
-        </>
+        </div>
     );
 }

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom";
-import { API_PREFIX } from "src/Common/Consts";
+import { Button } from "src/Common/Components/Button";
+import { API_PREFIX, GENERAL_COLOR } from "src/Common/Consts";
 
 export function FillData ({ onSucces }) {
     const { id } = useParams();
@@ -55,46 +56,46 @@ export function FillData ({ onSucces }) {
                 </>
             ) : null}
 
-            Фамилия
-            <input onChange={(e) => {
+            <b style={{ color: GENERAL_COLOR }}>Фамилия</b>
+            <input style={{ height: '25px' }} onChange={(e) => {
                 setFamilyName(e.target.value);
             }} />
-            <br /><br />
+            <br />
 
-            Имя
-            <input onChange={(e) => {
+            <b style={{ color: GENERAL_COLOR }}>Имя</b>
+            <input style={{ height: '25px' }} onChange={(e) => {
                 setFirstName(e.target.value);
             }} />
-            <br /><br />
+            <br />
 
-            Отчество
-            <input onChange={(e) => {
+            <b style={{ color: GENERAL_COLOR }}>Отчество</b>
+            <input style={{ height: '25px' }} onChange={(e) => {
                 setLastName(e.target.value);
             }} />
-            <br /><br />
+            <br />
 
-            Дата рождения
-            <input onChange={(e) => {
+            <b style={{ color: GENERAL_COLOR }}>Дата рождения</b>
+            <input style={{ height: '25px' }} onChange={(e) => {
                 setDateOfBorn(e.target.value);
             }} />
-            <br /><br />
+            <br />
 
-            Контактный телефон
-            <input onChange={(e) => {
+            <b style={{ color: GENERAL_COLOR }}>Контактный телефон</b>
+            <input style={{ height: '25px' }} onChange={(e) => {
                 setPhone(e.target.value);
             }}/>
-            <br /><br />
-
-            Резюме
             <br />
-            <input type="file" onChange={(e) => {
+
+            <b style={{ color: GENERAL_COLOR }}>Резюме</b>
+            <br />
+            <input className="custom-file-upload" type="file" onChange={(e) => {
                 setFile(e.target.files[0]);
             } }/>
-            <br /><br />
+            <br />
 
-            <button onClick={ handleSend }>
+            <Button onClick={ handleSend }>
                 Отправить данные
-            </button>
+            </Button>
         </>
     );
 }

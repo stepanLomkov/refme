@@ -1,5 +1,7 @@
 import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import { JSX } from "react/jsx-runtime";
+import { Button } from "src/Common/Components/Button";
+import { GENERAL_COLOR } from "src/Common/Consts";
 import { AdminPanelPage } from "src/Entities/AdminPanel/Bootstrap";
 import { ADMIN_PANEL_PATH } from "src/Entities/AdminPanel/Bootstrap/Path";
 import { AuthPage } from "src/Entities/Auth/Bootstrap";
@@ -21,29 +23,33 @@ export function MainLayout (): JSX.Element {
 
     return (
         <>
-            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 'x-large' }}>
-                <span onClick={() => window.location.href = '/'}>RefMe</span>
+            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 'xxx-large',  height: '50px', color: GENERAL_COLOR }}>
+                <b onClick={() => window.location.href = '/'}>RefMe</b>
                 {localStorage.getItem('accessToken') ?
-                    <button onClick={ () => navigate(PROFILE_PATH) }>
+                    <Button onClick={ () => navigate(PROFILE_PATH) } >
                         Профиль
-                    </button>
+                    </Button>
                     :
-                    <button onClick={ () => navigate(AUTH_PATH)}>
+                    <Button onClick={ () => navigate(AUTH_PATH)}>
                         Зарегистрироваться или войти
-                    </button>
+                    </Button>
                 }
             </div>
-            
-            <Routes>
-                <Route element={ <Navigate to={ HOME_PATH } replace /> } index />
-                <Route element={ <HomePage /> } path={ `/${HOME_PATH}/*` } />
-                <Route element={ <AuthPage /> } path={ AUTH_PATH } />
-                <Route element={ <ProfilePage /> } path={ PROFILE_PATH } />
-                <Route element={ <ConfirmEmploymentPage /> } path={ CONFIRM_EMPLOYMENT_PATH } />
-                <Route element={ <AdminPanelPage /> } path={ `${ADMIN_PANEL_PATH}/*` } />
-                <Route element={ <CreatePage /> } path={ CREATE_PATH } />
-                <Route element={ <DealPage /> } path={ DEAL_PATH } />
-            </Routes>
+
+            <style>{'.custom-file-upload { display: inline-block; padding: 6px 12px; cursor: pointer; background-color: #D8BFD8; border: 1px solid #ccc; border-radius: 4px; }'}</style>
+
+            <div style={{ justifyContent: 'center', display: 'flex' }}>
+                <Routes>
+                    <Route element={ <Navigate to={ HOME_PATH } replace /> } index />
+                    <Route element={ <HomePage /> } path={ `/${HOME_PATH}/*` } />
+                    <Route element={ <AuthPage /> } path={ AUTH_PATH } />
+                    <Route element={ <ProfilePage /> } path={ PROFILE_PATH } />
+                    <Route element={ <ConfirmEmploymentPage /> } path={ CONFIRM_EMPLOYMENT_PATH } />
+                    <Route element={ <AdminPanelPage /> } path={ `${ADMIN_PANEL_PATH}/*` } />
+                    <Route element={ <CreatePage /> } path={ CREATE_PATH } />
+                    <Route element={ <DealPage /> } path={ DEAL_PATH } />
+                </Routes>
+            </div>  
         </>
     );
 }

@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { generatePath, useNavigate } from "react-router-dom";
 import { JSX } from "react/jsx-runtime";
-import { API_PREFIX } from "src/Common/Consts";
+import { Button } from "src/Common/Components/Button";
+import { API_PREFIX, GENERAL_COLOR } from "src/Common/Consts";
 import { ADMIN_PANEL_PATH } from "src/Entities/AdminPanel/Bootstrap/Path";
 import { CONFIRM_EMPLOYMENT_PATH } from "src/Entities/ConfirmEmployment/Bootstrap/Path";
 import { CREATE_PATH } from "src/Entities/Create/Bootstrap/Path";
@@ -29,50 +30,49 @@ export function Profile (): JSX.Element {
     }, []);
 
     return (
-        <>
-            Логин аккаунта: {profile?.login}
-            <br/><br/>
+        <div style={{ display: 'flex', flexDirection: 'column', width: '50%', marginTop: '30px', maxWidth: '500px', alignItems: 'center', fontSize: '18px' }}>
+            <div><span style={{ color: GENERAL_COLOR }}>Логин аккаунта:</span> {profile?.login}</div> <br />
 
             {profile?.isAdmin ? (
                 <>
-                    <button
+                    <Button
                         onClick={() => {
                             navigate(`/${ADMIN_PANEL_PATH}`);
                         }}
                     >
-                        Админка
-                    </button> 
-                    <br/><br/>
+                        Панель администратора
+                    </Button> 
+                    <br/>
                 </>
             ) : null}
 
-            Возможность создавать вакансии: {profile?.hasCrateVacancy ? 'есть' : 'нет'}
-            <br/>
+            <div><span style={{ color: GENERAL_COLOR }}>Возможность создавать вакансии:</span> {profile?.hasCrateVacancy ? 'есть' : 'нет'}</div> <br />
 
             {profile?.company ? (
-                <>Ваша компания: {profile.company} <br /></>
+                <div><span style={{ color: GENERAL_COLOR }}>Ваша компания:</span> {profile.company}<br /></div> 
             ) : null}
 
             {profile?.hasCrateVacancy ? (
-                <button
+                <Button
                     onClick={() => {
                         navigate(`/${CREATE_PATH}`);
                     }}
                 >
                     Создать вакансию
-                </button> 
+                </Button> 
             ) : (
                 profile?.activeConfirm ? (
                     <>Ваш запрос на возможность создания заявок на рассмотрении, ожидайте</>
                 ) : (
-                    <button onClick={() => navigate(`/${CONFIRM_EMPLOYMENT_PATH}`)}>
+                    <Button onClick={() => navigate(`/${CONFIRM_EMPLOYMENT_PATH}`)}>
                         Подтвердить трудоустройство
-                    </button>
+                    </Button>
                 )
             )}
             <br />
+
             {profile?.hasCrateVacancy || profile?.activeConfirm ? (
-                <button
+                <Button
                     onClick={async () => {
                         await fetch(`${API_PREFIX}/delete-confirm-employment`, {
                             method: "DELETE",
@@ -85,25 +85,22 @@ export function Profile (): JSX.Element {
                     }}
                 >
                     Удалить подтверждение о трудоустройстве
-                </button>
+                </Button>
             ) : null}
-            <br/><br/>
+            <br/>
 
             {profile?.createdVacancies && profile.createdVacancies.length !== 0 ? (
                 <>
-                    Открытые вакансии, созданные вами:
+                    Вакансии, созданные вами:
                     {profile.createdVacancies.map(({ id, city, description }) => {
                         return (
-                            <li key={ id }>
-                                {description}, 
-                                {city}
-                                <button onClick={ () => navigate(`/${generatePath(DEAL_PATH, { id })}`) } >
-                                    Посмотреть детали
-                                </button>
-                            </li>
+                            <div key={ id } onClick={ () => navigate(`/${generatePath(DEAL_PATH, { id })}`) } style={{ width: '100%', padding: '4px', margin: '6px 0', fontSize: '16px', color: GENERAL_COLOR, backgroundColor: '#D8BFD8', fontWeight: 600 }} >
+                                {`Название: ${description}`}<br />
+                                {`Город: ${city}`}<br />
+                            </div>
                         )
                     })}
-                    <br/><br/>
+                    <br/>
                 </>
             ) : null}
 
@@ -112,28 +109,24 @@ export function Profile (): JSX.Element {
                     Активные вакансии, на которые вы откликнулись:
                     {profile.assignedVacancies.map(({ id, city, description, company }) => {
                         return (
-                            <li key={ id }>
-                                {description}, 
-                                {company},
-                                {city}
-                                <button onClick={ () => navigate(`/${generatePath(DEAL_PATH, { id })}`) } >
-                                    Посмотреть детали
-                                </button>
-                            </li>
+                            <div key={ id } onClick={ () => navigate(`/${generatePath(DEAL_PATH, { id })}`) } style={{ width: '100%', padding: '4px', margin: '6px 0', fontSize: '16px', color: GENERAL_COLOR, backgroundColor: '#D8BFD8', fontWeight: 600 }} >
+                                {`Название: ${description}`}<br />
+                                {`Компания: ${company}, Город: ${city}`}<br />
+                            </div>
                         )
                     })}
-                    <br/><br/>
+                    <br/>
                 </>
             ) : null}
 
-            <button
+            <Button
                 onClick={() => {
                     localStorage.removeItem('accessToken');
                     location.href = '/';
                 }}
             >
                 Выйти
-            </button>
-        </>
+            </Button>
+        </div>
     );
 }

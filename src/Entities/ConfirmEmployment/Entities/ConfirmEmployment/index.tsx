@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { JSX } from "react/jsx-runtime";
-import { API_PREFIX } from "src/Common/Consts";
+import { Button } from "src/Common/Components/Button";
+import { API_PREFIX, GENERAL_COLOR } from "src/Common/Consts";
 import { PROFILE_PATH } from "src/Entities/Profile/Bootstrap/Path";
 
 export function ConfirmEmployment (): JSX.Element {
@@ -40,8 +41,27 @@ export function ConfirmEmployment (): JSX.Element {
     }
 
     return (
-        <>
-            Форма подтверждения трудоустройства
+        <div style={{ display: 'flex', flexDirection: 'column', width: '50%', marginTop: '100px', maxWidth: '500px' }}>
+            <b style={{ color: GENERAL_COLOR, fontSize: '20px' }}>Форма подтверждения трудоустройства</b>
+            <br /><br />
+
+            <b style={{ color: GENERAL_COLOR }}>Компания</b>
+            <input style={{ height: '25px' }} onChange={(e) => {
+                setCompany(e.target.value);
+            }} />
+            <br /><br />
+ 
+            <b style={{ color: GENERAL_COLOR }}>Контактный телефон</b>
+            <input style={{ height: '25px' }} onChange={(e) => {
+                setPhone(e.target.value);
+            }}/>
+            <br /><br />
+
+            Доказательство трудоустройства (например трудовой договор)
+            <br />
+            <input className="custom-file-upload" type="file" onChange={(e) => {
+                setFile(e.target.files[0]);
+            } }/>
             <br /><br />
 
             {hasErrors ? (
@@ -51,28 +71,9 @@ export function ConfirmEmployment (): JSX.Element {
                 </>
             ) : null}
 
-            Компания
-            <input onChange={(e) => {
-                setCompany(e.target.value);
-            }} />
-            <br /><br />
-
-            Контактный телефон 
-            <input onChange={(e) => {
-                setPhone(e.target.value);
-            }}/>
-            <br /><br />
-
-            Доказательство трудоустройства (например трудовой договор)
-            <br />
-            <input type="file" onChange={(e) => {
-                setFile(e.target.files[0]);
-            } }/>
-            <br /><br />
-
-            <button onClick={ handleConfirm }>
+            <Button onClick={ handleConfirm }>
                 Отправить запрос на подтверждение
-            </button>
-        </>
+            </Button>
+        </div>
     )
 }

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { API_PREFIX } from "src/Common/Consts";
+import { Button } from "src/Common/Components/Button";
+import { API_PREFIX, GENERAL_COLOR } from "src/Common/Consts";
 import { PROFILE_PATH } from "src/Entities/Profile/Bootstrap/Path";
 
 export function Create (): JSX.Element {
@@ -41,45 +42,45 @@ export function Create (): JSX.Element {
     }
 
     return (
-        <>
-            Создание вакансии
+        <div style={{ display: 'flex', flexDirection: 'column', width: '50%', marginTop: '100px', maxWidth: '500px' }}>
+            <b style={{ color: GENERAL_COLOR, fontSize: '20px' }}>Создание вакансии</b>
+            <br /><br />
+
+            <b style={{ color: GENERAL_COLOR }}>Краткое описание</b>
+            <input style={{ height: '25px' }} onChange={(e) => {
+                setDescription(e.target.value);
+            }} />
+            <br />
+
+            <b style={{ color: GENERAL_COLOR }}>Город</b>
+            <input style={{ height: '25px' }} onChange={(e) => {
+                setCity(e.target.value);
+            }} />
+            <br />
+
+            <b style={{ color: GENERAL_COLOR }}>Подробная информация о вакансии</b>
+            <textarea style={{ height: '300px' }} onChange={(e) => {
+                setMore(e.target.value);
+            }} />
+            <br />
+
+            Доказательство возможности рекомендации (например скриншот из реферальной программы)
+            <br />
+            <input className="custom-file-upload" type="file" onChange={(e) => {
+                setFile(e.target.files[0]);
+            } }/>
             <br /><br />
 
             {hasErrors ? (
                 <>
                     <span style={{ color: 'red' }}>Заполните все поля для отправки запроса!</span>
-                    <br /><br />
+                    <br />
                 </>
             ) : null}
 
-            Краткое описание
-            <input onChange={(e) => {
-                setDescription(e.target.value);
-            }} />
-            <br /><br />
-
-            Город
-            <input onChange={(e) => {
-                setCity(e.target.value);
-            }} />
-            <br /><br />
-
-            Подробная информация о вакансии<br />
-            <textarea onChange={(e) => {
-                setMore(e.target.value);
-            }} />
-            <br /><br />
-
-            Доказательство возможности рекомендации (например скриншот из реферальной программы)
-            <br />
-            <input type="file" onChange={(e) => {
-                setFile(e.target.files[0]);
-            } }/>
-            <br /><br />
-
-            <button onClick={ handleConfirm }>
+            <Button onClick={ handleConfirm }>
                 Отправить на проверку
-            </button>
-        </>
+            </Button>
+        </div>
     );
 }

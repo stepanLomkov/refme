@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { generatePath, useNavigate, useParams } from "react-router-dom";
 import { JSX } from "react/jsx-runtime";
-import { API_PREFIX } from "src/Common/Consts";
+import { Button } from "src/Common/Components/Button";
+import { API_PREFIX, GENERAL_COLOR } from "src/Common/Consts";
 import { AUTH_PATH } from "src/Entities/Auth/Bootstrap/Path";
 import { DEAL_PATH } from "src/Entities/Deal/Bootstrap/Path";
 
@@ -39,12 +40,13 @@ export default function Details (): JSX.Element {
     }
 
     return (
-        <>
-            <br />
-            Компания: {data.company} <br />
-            Город: {data.city} <br />
-            Описание: {data.description} <br />
-            Подробная информация: {data.more} <br />
+        <div style={{ display: 'flex', flexDirection: 'column', width: '50%', marginTop: '30px', maxWidth: '500px', alignItems: 'center' }}>
+            <div><span style={{ color: GENERAL_COLOR }}>Название:</span> {data.description}</div> <br /><br />
+            <div><span style={{ color: GENERAL_COLOR }}>Компания:</span> {data.company}</div> <br /><br />
+            <div><span style={{ color: GENERAL_COLOR }}>Город:</span> {data.city}</div> <br /><br />
+
+            <span style={{ color: GENERAL_COLOR }}>Подробная информация</span>
+            {data.more} <br /><br />
 
             <a href={`${API_PREFIX}/download/${data.file}`} download>
                 доказательство  возможности рекомендации
@@ -52,17 +54,17 @@ export default function Details (): JSX.Element {
             <br /><br />
 
             {localStorage.getItem('accessToken') ? (
-                <button onClick={ handleAssignClick }>
+                <Button onClick={ handleAssignClick }>
                     Получить рефералку
-                </button>
+                </Button>
             ) : (
                 <>
                     Для продолжения авторизуйтесь
-                    <button onClick={ () => navigate(`../../${AUTH_PATH}`)}>
+                    <Button onClick={ () => navigate(`../../${AUTH_PATH}`)}>
                         Зарегистрироваться или войти
-                    </button>
+                    </Button>
                 </>  
             )}
-        </>
+        </div>
     );
 }

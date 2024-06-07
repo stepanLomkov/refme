@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom"
-import { API_PREFIX } from "src/Common/Consts";
+import { Button } from "src/Common/Components/Button";
+import { API_PREFIX, GENERAL_COLOR } from "src/Common/Consts";
 
 export function ConfirmCreateVacancy () {
     const navigate = useNavigate();
@@ -42,48 +43,48 @@ export function ConfirmCreateVacancy () {
     }
 
     return (
-        <>
-            <button
+        <div style={{ display: 'flex', flexDirection: 'column', width: '50%', marginTop: '100px', maxWidth: '500px' }}>
+            <Button
                 onClick={() => {
                     navigate('..');
                 }}
             >
                 Вренуться в панель администратора
-            </button>
+            </Button>
             <br /><br />
             
-            Подтверждение создаваемых вакансий
+            <b style={{ color: GENERAL_COLOR, fontSize: '20px' }}>Подтверждение создаваемых вакансий</b>
             <br /><br />
 
-            Список активных запросов:
+            <b style={{ color: GENERAL_COLOR }}>Список активных запросов:</b>
             <br /><br />
 
-            <ul>
-                {date.length === 0 && 'нет данных'}
-                {date?.map(({ _id, city, company, description, file, login, more, phone }) => {
-                    return (
-                        <li key={ _id }>
-                            {`Пользователь: ${login}, `}
-                            {`Контактный телефон: ${phone}, `}
-                            {`Компания: ${company}, `}
-                            {`Город: ${city}, `}
-                            {`Краткое описание: ${description}, `}
-                            <a href={`${API_PREFIX}/download/${file}`} download>
-                                доказательство  возможности рекомендации
-                            </a>
-                            <br />
-                            {`Подробное описание: ${more}, `}
-                            
-                            <button onClick={ () => handleAccept(_id) } >
+            {date.length === 0 && <div style={{ fontSize: '18px', color: GENERAL_COLOR, fontWeight: 600 }}>нет данных</div>}
+            {date?.map(({ _id, city, company, description, file, login, more, phone }) => {
+                return (
+                    <div key={ _id } style={{ width: '100%', padding: '4px', margin: '6px 0', fontSize: '16px', color: GENERAL_COLOR, backgroundColor: '#D8BFD8', fontWeight: 600 }} >
+                        {`Пользователь: ${login}, `}
+                        {`Контактный телефон: ${phone}, `}<br />
+                        {`Компания: ${company}, `}
+                        {`Город: ${city}, `}<br />
+                        {`Краткое описание: ${description}, `}<br />
+                        <a href={`${API_PREFIX}/download/${file}`} download>
+                            доказательство  возможности рекомендации
+                        </a>
+                        <br />
+                        {`Подробное описание: ${more}, `}<br />
+                        
+                        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                            <Button onClick={ () => handleReject(_id) } >
+                                    Отклонить
+                            </Button>
+                            <Button onClick={ () => handleAccept(_id) } >
                                 Подтвердить
-                            </button>
-                            <button onClick={ () => handleReject(_id) } >
-                                Отклонить
-                            </button>
-                        </li>
-                    )
-                })}
-            </ul>
-        </>
+                            </Button>
+                        </div>
+                    </div>
+                )
+            })}
+        </div>
     )
 }

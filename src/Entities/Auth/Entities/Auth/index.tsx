@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { JSX } from "react/jsx-runtime";
-import { API_PREFIX } from "src/Common/Consts";
+import { Button } from "src/Common/Components/Button";
+import { API_PREFIX, GENERAL_COLOR } from "src/Common/Consts";
 
 export function Auth (): JSX.Element {
     const [login, setLogin] = useState('');
@@ -58,20 +59,21 @@ export function Auth (): JSX.Element {
     }
 
     return (
-        <>
-            Логин <input onBlur={(e) => setLogin(e.target.value)} />
+        <div style={{ display: 'flex', flexDirection: 'column', width: '50%', marginTop: '100px', maxWidth: '500px' }}>
+            <b style={{ color: GENERAL_COLOR, fontSize: '20px' }}>Логин</b> <input style={{ height: '25px' }} onBlur={(e) => setLogin(e.target.value)} />
             <br />
-            Пароль <input onBlur={(e) => setPassword(e.target.value)} type="password" />
+            <b style={{ color: GENERAL_COLOR, fontSize: '20px' }}>Пароль</b> <input style={{ height: '25px' }} onBlur={(e) => setPassword(e.target.value)} type="password" />
             <br />
 
-            <button onClick={ handleLoginClick } >
+            <Button onClick={ handleLoginClick } >
                 Войти
-            </button>
+            </Button>
+
             <br />
 
-            <button onClick={ handleRegisterClick }>
+            <Button onClick={ handleRegisterClick }>
                 Зарегистрироваться
-            </button>
-        </>
+            </Button>
+        </div>
     );
 }
